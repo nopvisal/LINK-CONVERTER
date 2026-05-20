@@ -368,6 +368,7 @@
     const url = dom.videoUrl.value.trim();
     if (!url) return showToast('Paste a link first.', 'error');
 
+    // auto-detect platform
     if (/youtube\.com|youtu\.be/.test(url)) switchPlatform('youtube');
     else if (/facebook\.com|fb\.watch/.test(url)) switchPlatform('facebook');
     else if (/tiktok\.com/.test(url)) switchPlatform('tiktok');
@@ -404,8 +405,9 @@
             author: data.author,
             quality: data.quality,
         };
-        state.directUrl = data.downloadUrl;   // <-- key for download
+        state.directUrl = data.downloadUrl;   // <-- this is the direct CDN URL
 
+        // Update UI
         dom.previewThumb.src = state.videoInfo.thumbnail || '';
         dom.previewTitle.textContent = state.videoInfo.title || 'Video';
         let meta = `Format: ${state.format === 'mp3' ? 'MP3' : 'MP4'}`;
@@ -426,48 +428,36 @@
 }
 
 async function downloadMedia() {
-    if (!state.videoInfo) return showToast('Fetch info first.', 'error');
+    if (!state.directUrl) return showToast('Fetch info first.', 'error');
 
     dom.btnDownload.disabled = true;
     dom.btnDownload.innerHTML = '<span class="spinner"></span> Downloading...';
 
-    const ext = state.format === 'mp3' ? 'mp3' : 'mp4';
-    const title = (state.videoInfo.title || 'video')
-        .replace(/[^a-zA-Z0-9\s]/g, '')
-        .substring(0, 60)
-        .trim() || 'video';
-
-    let downloadUrl;
-
-    if (state.videoInfo.type === 'tiktok') {
-        downloadUrl = `${BACKEND}/api/download-video?url=${encodeURIComponent(state.videoInfo.directUrl)}&title=${encodeURIComponent(title)}&ext=${ext}`;
-    } else if (state.videoInfo.type === 'youtube' || state.videoInfo.type === 'facebook') {
-        downloadUrl = `${BACKEND}/api/download-video?url=${encodeURIComponent(state.videoInfo.originalUrl)}&formatId=${state.videoInfo.formatId}&title=${encodeURIComponent(title)}&ext=${ext}`;
-    } else {
-        // fallback for any other type
-        downloadUrl = `${BACKEND}/api/download-video?url=${encodeURIComponent(state.videoInfo.directUrl || state.videoInfo.originalUrl)}&title=${encodeURIComponent(title)}&ext=${ext}`;
-    }
-
     try {
-        // Fetch as blob (like the original TikTok method)
-        const response = await fetch(downloadUrl);
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        // Direct blob download – exactly how TikTok used to work
+        const resp = await fetch(state.directUrl);
+        if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
 
-        const blob = await response.blob();
+        const blob = await resp.blob();
         const blobUrl = URL.createObjectURL(blob);
         const a = document.createElement('a');
         a.href = blobUrl;
-        a.download = `${title}.${ext}`;
+        const ext = state.format === 'mp3' ? 'mp3' : 'mp4';
+        const name = (state.videoInfo?.title || 'download')
+            .replace(/[^a-zA-Z0-9\s]/g, '')
+            .substring(0, 60)
+            .trim() || 'video';
+        a.download = `${name}.${ext}`;
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         setTimeout(() => URL.revokeObjectURL(blobUrl), 5000);
-
         showToast('Download complete! ✅', 'success');
     } catch (err) {
-        console.error('Download failed:', err);
-        showToast('Download failed. Trying direct link...', 'error');
-        window.open(downloadUrl, '_blank');
+        console.error(err);
+        // Fallback: open direct URL in new tab
+        window.open(state.directUrl, '_blank');
+        showToast('Opening in new tab...', 'info');
     } finally {
         dom.btnDownload.disabled = false;
         dom.btnDownload.innerHTML = state.format === 'mp3' ? '⬇️ Download MP3' : '⬇️ Download MP4';
