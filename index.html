@@ -368,13 +368,13 @@
     const url = dom.videoUrl.value.trim();
     if (!url) return showToast('Paste a link first.', 'error');
 
+    // Auto-detect platform
     if (/youtube\.com|youtu\.be/.test(url)) switchPlatform('youtube');
     else if (/facebook\.com|fb\.watch/.test(url)) switchPlatform('facebook');
     else if (/tiktok\.com/.test(url)) switchPlatform('tiktok');
     else return showToast('Unsupported URL.', 'error');
 
     state.videoInfo = null;
-    state.directUrl = null;
     dom.resultArea.classList.remove('show');
     dom.btnFetch.disabled = true;
     dom.btnFetch.innerHTML = '<span class="spinner"></span> Fetching...';
@@ -386,30 +386,48 @@
             const resp = await fetch(`${BACKEND}/api/youtube?url=${encodeURIComponent(url)}`);
             if (!resp.ok) throw new Error((await resp.json()).error);
             data = await resp.json();
-            state.videoInfo = { title: data.title, thumbnail: data.thumbnail };
-            state.directUrl = data.downloadUrl;
+            state.videoInfo = {
+                title: data.title,
+                thumbnail: data.thumbnail,
+                duration: data.duration,
+                quality: data.quality,
+                formatId: data.formatId,   // used later for download
+                type: 'youtube',
+                originalUrl: url,
+            };
         } else if (state.platform === 'tiktok') {
             const resp = await fetch(`${BACKEND}/api/tiktok?url=${encodeURIComponent(url)}`);
             if (!resp.ok) throw new Error((await resp.json()).error);
             data = await resp.json();
-            state.videoInfo = { title: data.title, thumbnail: data.thumbnail, duration: data.duration, author: data.author };
-            state.directUrl = data.downloadUrl;
-        } else {
+            state.videoInfo = {
+                title: data.title,
+                thumbnail: data.thumbnail,
+                duration: data.duration,
+                author: data.author,
+                directUrl: data.directUrl,  // TikTok gives a direct CDN URL
+                type: 'tiktok',
+            };
+        } else { // Facebook
             const infoResp = await fetch(`${BACKEND}/api/info?url=${encodeURIComponent(url)}&format=${state.format}`);
             if (!infoResp.ok) throw new Error((await infoResp.json()).error);
             const infoData = await infoResp.json();
-            state.videoInfo = infoData;
-            const dlResp = await fetch(`${BACKEND}/api/download?url=${encodeURIComponent(url)}&formatId=${infoData.formatId}`);
-            if (!dlResp.ok) throw new Error((await dlResp.json()).error);
-            const dlData = await dlResp.json();
-            state.directUrl = dlData.downloadUrl;
+            state.videoInfo = {
+                title: infoData.title,
+                thumbnail: infoData.thumbnail,
+                duration: infoData.duration,
+                formatId: infoData.formatId,
+                type: 'facebook',
+                originalUrl: url,
+            };
         }
 
+        // Update UI
         dom.previewThumb.src = state.videoInfo.thumbnail || '';
         dom.previewTitle.textContent = state.videoInfo.title || 'Video';
         let meta = `Format: ${state.format === 'mp3' ? 'MP3' : 'MP4'}`;
         if (state.videoInfo.duration) meta += ` | Duration: ${state.videoInfo.duration}`;
         if (state.videoInfo.author) meta += ` | @${state.videoInfo.author}`;
+        if (state.videoInfo.quality) meta += ` | ${state.videoInfo.quality}`;
         dom.previewMeta.textContent = meta;
         dom.resultArea.classList.add('show');
         dom.btnDownload.textContent = state.format === 'mp3' ? '⬇️ Download MP3' : '⬇️ Download MP4';
@@ -425,36 +443,32 @@
 }
 
 async function downloadMedia() {
-    if (!state.directUrl) return showToast('Fetch info first.', 'error');
+    if (!state.videoInfo) return showToast('Fetch info first.', 'error');
 
-    dom.btnDownload.disabled = true;
-    dom.btnDownload.innerHTML = '<span class="spinner"></span> Downloading...';
+    const ext = state.format === 'mp3' ? 'mp3' : 'mp4';
+    const title = (state.videoInfo.title || 'video')
+        .replace(/[^a-zA-Z0-9\s]/g, '')
+        .substring(0, 60)
+        .trim() || 'video';
 
-    try {
-        const ext = state.format === 'mp3' ? 'mp3' : 'mp4';
-        const title = (state.videoInfo?.title || 'video').replace(/[^a-zA-Z0-9\s]/g, '').substring(0, 60).trim() || 'video';
+    let downloadUrl;
 
-        // Build the proxy URL that forces a file download
-        const proxyUrl = `${BACKEND}/api/proxy-download?url=${encodeURIComponent(state.directUrl)}&title=${encodeURIComponent(title)}&ext=${ext}`;
-
-        // Create an invisible anchor and click it
-        const a = document.createElement('a');
-        a.href = proxyUrl;
-        a.download = '';
-        a.style.display = 'none';
-        document.body.appendChild(a);
-        a.click();
-        document.body.removeChild(a);
-
-        showToast('Download started! ✅', 'success');
-    } catch (err) {
-        console.error(err);
-        showToast('Download failed. Opening in new tab.', 'error');
-        window.open(state.directUrl, '_blank');
-    } finally {
-        dom.btnDownload.disabled = false;
-        dom.btnDownload.innerHTML = state.format === 'mp3' ? '⬇️ Download MP3' : '⬇️ Download MP4';
+    if (state.videoInfo.type === 'tiktok') {
+        // TikTok: use direct CDN URL via the download endpoint
+        downloadUrl = `${BACKEND}/api/download-video?url=${encodeURIComponent(state.videoInfo.directUrl)}&title=${encodeURIComponent(title)}&ext=${ext}`;
+    } else {
+        // YouTube / Facebook: use original URL + formatId
+        downloadUrl = `${BACKEND}/api/download-video?url=${encodeURIComponent(state.videoInfo.originalUrl)}&formatId=${state.videoInfo.formatId}&title=${encodeURIComponent(title)}&ext=${ext}`;
     }
+
+    // Trigger download via hidden iframe (reliable, no popups)
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = downloadUrl;
+    document.body.appendChild(iframe);
+    setTimeout(() => document.body.removeChild(iframe), 5000);
+
+    showToast('Download started! ✅', 'success');
 }
 
 // Helper fetch with timeout (add this anywhere in your script)
