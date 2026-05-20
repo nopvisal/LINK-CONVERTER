@@ -387,13 +387,10 @@
     const resp = await fetch(`${BACKEND}/api/youtube?url=${encodeURIComponent(url)}`);
     if (!resp.ok) throw new Error((await resp.json()).error);
     const data = await resp.json();
-    state.videoInfo = {
-        title: data.title,
-        thumbnail: data.thumbnail,
-        duration: data.duration,
-    };
+    state.videoInfo = { title: data.title, thumbnail: data.thumbnail };
     state.directUrl = data.downloadUrl;
     setProgress(80);
+
 
 }
         // ----- TIKTOK: use tikwm.com -----
@@ -448,31 +445,21 @@
 }
       async function downloadMedia() {
     if (!state.directUrl) return showToast('Fetch info first.', 'error');
-
     dom.btnDownload.disabled = true;
     dom.btnDownload.innerHTML = '<span class="spinner"></span> Downloading...';
-
     try {
-        // Build the proxy URL
         const ext = state.format === 'mp3' ? 'mp3' : 'mp4';
-        const title = (state.videoInfo?.title || 'download').substring(0, 60);
+        const title = (state.videoInfo?.title || 'video').substring(0, 60);
         const proxyUrl = `${BACKEND}/api/proxy-download?url=${encodeURIComponent(state.directUrl)}&title=${encodeURIComponent(title)}&ext=${ext}`;
-
-        // Use an invisible iframe or fetch to trigger download
-        // Simple approach: create a hidden iframe that loads the proxy URL
         const iframe = document.createElement('iframe');
         iframe.style.display = 'none';
         iframe.src = proxyUrl;
         document.body.appendChild(iframe);
-
-        // Remove iframe after a few seconds
         setTimeout(() => document.body.removeChild(iframe), 5000);
-
         showToast('Download started! ✅', 'success');
     } catch (err) {
-        console.warn('Download failed:', err.message);
-        showToast('Download failed. Opening in new tab...', 'error');
         window.open(state.directUrl, '_blank');
+        showToast('Opening in new tab...', 'info');
     } finally {
         dom.btnDownload.disabled = false;
         dom.btnDownload.innerHTML = state.format === 'mp3' ? '⬇️ Download MP3' : '⬇️ Download MP4';
