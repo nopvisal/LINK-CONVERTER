@@ -384,7 +384,7 @@
     try {
         // ----- YOUTUBE: use Invidious fallback -----
         if (state.platform === 'youtube') {
-    const infoUrl = `${BACKEND}/api/info?url=${encodeURIComponent(url)}&format=${state.format}`;
+    const infoUrl = `${BACKEND}/api/youtube?url=${encodeURIComponent(url)}&format=${state.format}`;
     const infoResp = await fetch(infoUrl);
     if (!infoResp.ok) throw new Error((await infoResp.json()).error);
     const infoData = await infoResp.json();
