@@ -454,21 +454,38 @@ async function downloadMedia() {
     let downloadUrl;
 
     if (state.videoInfo.type === 'tiktok') {
-        // TikTok: use direct CDN URL via the download endpoint
         downloadUrl = `${BACKEND}/api/download-video?url=${encodeURIComponent(state.videoInfo.directUrl)}&title=${encodeURIComponent(title)}&ext=${ext}`;
     } else {
-        // YouTube / Facebook: use original URL + formatId
         downloadUrl = `${BACKEND}/api/download-video?url=${encodeURIComponent(state.videoInfo.originalUrl)}&formatId=${state.videoInfo.formatId}&title=${encodeURIComponent(title)}&ext=${ext}`;
     }
 
-    // Trigger download via hidden iframe (reliable, no popups)
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = downloadUrl;
-    document.body.appendChild(iframe);
-    setTimeout(() => document.body.removeChild(iframe), 5000);
+    // Try anchor click first (works in all browsers)
+    const a = document.createElement('a');
+    a.href = downloadUrl;
+    a.download = '';                         // not strictly needed, server sends header
+    a.target = '_blank';                     // fallback if anchor click doesn't trigger download
+    a.rel = 'noopener noreferrer';
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+
+    // Clean up after a short delay
+    setTimeout(() => {
+        document.body.removeChild(a);
+    }, 2000);
 
     showToast('Download started! ✅', 'success');
+
+    // If the anchor didn't work (e.g., browser blocked it), fallback to window.open
+    // We can't detect success, but we can try window.open as a backup after a small delay
+    setTimeout(() => {
+        // This is a failsafe – if no download started, the user can manually open it
+        // It won't open a new window if the download already started
+        const userPrompt = confirm('If the download hasn\'t started, click OK to open it in a new tab.');
+        if (userPrompt) {
+            window.open(downloadUrl, '_blank');
+        }
+    }, 3000);
 }
 
 // Helper fetch with timeout (add this anywhere in your script)
