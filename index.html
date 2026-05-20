@@ -37,39 +37,22 @@
             --transition:.25s cubic-bezier(.4,0,.2,1);
         }
 
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
-
-        html{
-            scroll-behavior:smooth;
-        }
-
+        *{ margin:0; padding:0; box-sizing:border-box; }
+        html{ scroll-behavior:smooth; }
         body{
             font-family:'Inter',sans-serif;
             background:var(--bg);
             color:var(--text);
             overflow-x:hidden;
         }
-
-        a{
-            text-decoration:none;
-            color:inherit;
-        }
-
-        img{
-            display:block;
-        }
-
+        a{ text-decoration:none; color:inherit; }
+        img{ display:block; max-width:100%; }
         .container{
             width:min(1180px, calc(100% - 40px));
             margin:auto;
         }
 
         /* ================= NAVBAR ================= */
-
         .navbar{
             position:sticky;
             top:0;
@@ -78,14 +61,12 @@
             background:rgba(255,255,255,.78);
             border-bottom:1px solid rgba(226,232,240,.7);
         }
-
         .nav-inner{
             height:78px;
             display:flex;
             align-items:center;
             justify-content:space-between;
         }
-
         .logo{
             font-size:1.5rem;
             font-weight:800;
@@ -94,7 +75,6 @@
             align-items:center;
             gap:10px;
         }
-
         .logo-badge{
             width:38px;
             height:38px;
@@ -107,7 +87,6 @@
             font-weight:700;
             box-shadow:0 10px 20px rgba(8,145,178,.2);
         }
-
         .nav-links{
             display:flex;
             gap:30px;
@@ -115,11 +94,7 @@
             font-size:.95rem;
             font-weight:500;
         }
-
-        .nav-links a:hover{
-            color:var(--text);
-        }
-
+        .nav-links a:hover{ color:var(--text); }
         .nav-cta{
             padding:12px 18px;
             border-radius:999px;
@@ -129,68 +104,13 @@
             font-weight:600;
             transition:var(--transition);
         }
-
-        .nav-cta:hover{
-            transform:translateY(-2px);
-        }
-        /* ================= PLATFORM COLORS ================= */
-
-.platform-btn[data-platform="youtube"]{
-    background:rgba(255,0,51,.06);
-    color:#ff0033;
-}
-
-.platform-btn[data-platform="youtube"]:hover{
-    border-color:#ff0033;
-    background:rgba(255,0,51,.1);
-}
-
-.platform-btn[data-platform="youtube"].active{
-    background:#ff0033;
-    color:white;
-    box-shadow:0 14px 30px rgba(255,0,51,.25);
-}
-
-.platform-btn[data-platform="facebook"]{
-    background:rgba(24,119,242,.06);
-    color:#1877f2;
-}
-
-.platform-btn[data-platform="facebook"]:hover{
-    border-color:#1877f2;
-    background:rgba(24,119,242,.1);
-}
-
-.platform-btn[data-platform="facebook"].active{
-    background:#1877f2;
-    color:white;
-    box-shadow:0 14px 30px rgba(24,119,242,.25);
-}
-
-.platform-btn[data-platform="tiktok"]{
-    background:rgba(0,0,0,.05);
-    color:#111111;
-}
-
-.platform-btn[data-platform="tiktok"]:hover{
-    border-color:#111111;
-    background:rgba(0,0,0,.08);
-}
-
-.platform-btn[data-platform="tiktok"].active{
-    background:#111111;
-    color:white;
-    box-shadow:0 14px 30px rgba(0,0,0,.2);
-}
-        }
+        .nav-cta:hover{ transform:translateY(-2px); }
 
         /* ================= HERO ================= */
-
         .hero{
             padding:90px 0 70px;
             position:relative;
         }
-
         .hero::before{
             content:"";
             position:absolute;
@@ -201,14 +121,12 @@
             right:-120px;
             pointer-events:none;
         }
-
         .hero-grid{
             display:grid;
             grid-template-columns:1.05fr .95fr;
             gap:50px;
             align-items:center;
         }
-
         .hero-badge{
             display:inline-flex;
             align-items:center;
@@ -223,14 +141,12 @@
             margin-bottom:22px;
             box-shadow:var(--shadow-sm);
         }
-
         .hero-badge span{
             width:8px;
             height:8px;
             background:var(--success);
             border-radius:50%;
         }
-
         .hero h1{
             font-size:clamp(2.6rem,5vw,4.6rem);
             line-height:1.05;
@@ -238,7 +154,6 @@
             margin-bottom:24px;
             max-width:720px;
         }
-
         .hero p{
             color:var(--text-soft);
             font-size:1.08rem;
@@ -246,13 +161,11 @@
             max-width:640px;
             margin-bottom:34px;
         }
-
         .hero-actions{
             display:flex;
             gap:14px;
             flex-wrap:wrap;
         }
-
         .btn{
             border:none;
             outline:none;
@@ -260,7 +173,6 @@
             transition:var(--transition);
             font-family:inherit;
         }
-
         .btn-primary{
             background:linear-gradient(135deg,var(--accent-2),var(--accent));
             color:white;
@@ -269,11 +181,7 @@
             font-weight:600;
             box-shadow:0 14px 30px rgba(8,145,178,.18);
         }
-
-        .btn-primary:hover{
-            transform:translateY(-2px);
-        }
-
+        .btn-primary:hover{ transform:translateY(-2px); }
         .btn-secondary{
             background:white;
             color:var(--text);
@@ -282,7 +190,6 @@
             font-weight:600;
             border:1px solid var(--border);
         }
-
         .hero-card{
             background:white;
             border:1px solid rgba(226,232,240,.8);
@@ -290,7 +197,6 @@
             padding:26px;
             box-shadow:var(--shadow-lg);
         }
-
         .hero-preview{
             border-radius:22px;
             overflow:hidden;
@@ -298,14 +204,12 @@
             aspect-ratio:16/10;
             position:relative;
         }
-
         .hero-preview img{
             width:100%;
             height:100%;
             object-fit:cover;
             opacity:.85;
         }
-
         .hero-floating{
             position:absolute;
             right:18px;
@@ -317,26 +221,20 @@
             min-width:180px;
             box-shadow:0 15px 30px rgba(0,0,0,.15);
         }
-
         .hero-floating small{
             color:var(--text-light);
             display:block;
             margin-bottom:6px;
         }
-
-        .hero-floating strong{
-            font-size:.95rem;
-        }
+        .hero-floating strong{ font-size:.95rem; }
 
         /* ================= FEATURES ================= */
-
         .feature-strip{
             display:grid;
             grid-template-columns:repeat(3,1fr);
             gap:18px;
             margin-top:26px;
         }
-
         .feature-mini{
             background:var(--surface);
             border:1px solid var(--border);
@@ -344,19 +242,8 @@
             padding:20px;
             box-shadow:var(--shadow-sm);
         }
-
-        .feature-mini h4{
-            margin-top:12px;
-            margin-bottom:8px;
-            font-size:1rem;
-        }
-
-        .feature-mini p{
-            font-size:.92rem;
-            color:var(--text-light);
-            line-height:1.7;
-        }
-
+        .feature-mini h4{ margin-top:12px; margin-bottom:8px; font-size:1rem; }
+        .feature-mini p{ font-size:.92rem; color:var(--text-light); line-height:1.7; }
         .mini-icon{
             width:46px;
             height:46px;
@@ -368,30 +255,52 @@
             font-size:1.2rem;
         }
 
+        /* ================= PLATFORM COLORS ================= */
+        .platform-btn[data-platform="youtube"]{
+            background:rgba(255,0,51,.06);
+            color:#ff0033;
+        }
+        .platform-btn[data-platform="youtube"]:hover{
+            border-color:#ff0033;
+            background:rgba(255,0,51,.1);
+        }
+        .platform-btn[data-platform="youtube"].active{
+            background:#ff0033;
+            color:white;
+            box-shadow:0 14px 30px rgba(255,0,51,.25);
+        }
+        .platform-btn[data-platform="facebook"]{
+            background:rgba(24,119,242,.06);
+            color:#1877f2;
+        }
+        .platform-btn[data-platform="facebook"]:hover{
+            border-color:#1877f2;
+            background:rgba(24,119,242,.1);
+        }
+        .platform-btn[data-platform="facebook"].active{
+            background:#1877f2;
+            color:white;
+            box-shadow:0 14px 30px rgba(24,119,242,.25);
+        }
+        .platform-btn[data-platform="tiktok"]{
+            background:rgba(0,0,0,.05);
+            color:#111111;
+        }
+        .platform-btn[data-platform="tiktok"]:hover{
+            border-color:#111111;
+            background:rgba(0,0,0,.08);
+        }
+        .platform-btn[data-platform="tiktok"].active{
+            background:#111111;
+            color:white;
+            box-shadow:0 14px 30px rgba(0,0,0,.2);
+        }
+
         /* ================= MAIN TOOL ================= */
-
-        .tool-section{
-            padding:90px 0;
-        }
-
-        .section-heading{
-            text-align:center;
-            margin-bottom:50px;
-        }
-
-        .section-heading h2{
-            font-size:2.3rem;
-            letter-spacing:-.04em;
-            margin-bottom:14px;
-        }
-
-        .section-heading p{
-            color:var(--text-light);
-            max-width:700px;
-            margin:auto;
-            line-height:1.8;
-        }
-
+        .tool-section{ padding:90px 0; }
+        .section-heading{ text-align:center; margin-bottom:50px; }
+        .section-heading h2{ font-size:2.3rem; letter-spacing:-.04em; margin-bottom:14px; }
+        .section-heading p{ color:var(--text-light); max-width:700px; margin:auto; line-height:1.8; }
         .tool-card{
             background:white;
             border-radius:32px;
@@ -399,18 +308,16 @@
             padding:34px;
             box-shadow:var(--shadow-lg);
         }
-
         .platform-selector{
             display:flex;
             gap:14px;
             flex-wrap:wrap;
             margin-bottom:28px;
         }
-
         .platform-btn{
             border:none;
             background:var(--surface-2);
-            border:1px solid transparent;
+            border:2px solid transparent;
             padding:14px 20px;
             border-radius:18px;
             display:flex;
@@ -421,50 +328,42 @@
             font-weight:600;
             color:var(--text-soft);
         }
-
         .platform-btn:hover{
             border-color:#cbd5e1;
             background:white;
         }
-
         .platform-btn.active{
             background:linear-gradient(135deg,var(--accent-2),var(--accent));
             color:white;
             box-shadow:0 12px 25px rgba(8,145,178,.22);
         }
-
         .badge{
             font-size:.72rem;
             padding:4px 8px;
             border-radius:999px;
             background:rgba(255,255,255,.2);
         }
-
         .tool-grid{
             display:grid;
             grid-template-columns:1.1fr .9fr;
             gap:24px;
         }
-
         .panel{
             background:var(--surface-2);
             border:1px solid var(--border);
             border-radius:24px;
             padding:24px;
         }
-
         .panel-title{
             font-size:1.05rem;
             font-weight:700;
             margin-bottom:18px;
         }
-
         .input-group{
             display:flex;
             gap:12px;
             flex-wrap:wrap;
         }
-
         .input-group input{
             flex:1;
             min-width:250px;
@@ -477,12 +376,10 @@
             transition:var(--transition);
             outline:none;
         }
-
         .input-group input:focus{
             border-color:#7dd3fc;
             box-shadow:0 0 0 4px rgba(6,182,212,.08);
         }
-
         .fetch-btn{
             padding:0 24px;
             border-radius:16px;
@@ -490,18 +387,13 @@
             color:white;
             font-weight:600;
         }
-
-        .fetch-btn:hover{
-            transform:translateY(-2px);
-        }
-
+        .fetch-btn:hover{ transform:translateY(-2px); }
         .format-selector{
             display:flex;
             gap:10px;
             margin-top:20px;
             flex-wrap:wrap;
         }
-
         .format-option{
             border:none;
             background:white;
@@ -513,49 +405,45 @@
             transition:var(--transition);
             color:var(--text-soft);
         }
-
         .format-option.selected{
             background:var(--primary);
             color:white;
             border-color:var(--primary);
         }
-
         .preview-card{
             background:white;
             border-radius:20px;
             overflow:hidden;
             border:1px solid var(--border);
         }
-
         .preview-thumb{
             width:100%;
             aspect-ratio:16/9;
             object-fit:cover;
             background:#e2e8f0;
         }
-
         .preview-content{
             padding:20px;
         }
-
         .preview-content h3{
             font-size:1rem;
             line-height:1.6;
             margin-bottom:8px;
+            overflow-wrap:anywhere;
+            word-break:break-word;
         }
-
         .preview-meta{
             color:var(--text-light);
             font-size:.88rem;
             margin-bottom:20px;
+            overflow-wrap:anywhere;
         }
-
         .download-btns{
             display:flex;
             gap:10px;
             flex-wrap:wrap;
+            width:100%;
         }
-
         .btn-download{
             background:var(--success);
             color:white;
@@ -563,7 +451,6 @@
             border-radius:14px;
             font-weight:600;
         }
-
         .btn-outline{
             background:white;
             border:1px solid var(--border);
@@ -571,28 +458,18 @@
             border-radius:14px;
             font-weight:600;
         }
-
         .result-area{
             display:none;
             margin-top:20px;
             animation:fade .4s ease;
+            width:100%;
+            overflow:hidden;
         }
-
-        .result-area.show{
-            display:block;
-        }
-
+        .result-area.show{ display:block; }
         @keyframes fade{
-            from{
-                opacity:0;
-                transform:translateY(10px);
-            }
-            to{
-                opacity:1;
-                transform:translateY(0);
-            }
+            from{ opacity:0; transform:translateY(10px); }
+            to{ opacity:1; transform:translateY(0); }
         }
-
         .progress-bar-wrap{
             height:8px;
             background:#e2e8f0;
@@ -601,11 +478,7 @@
             margin-top:20px;
             display:none;
         }
-
-        .progress-bar-wrap.active{
-            display:block;
-        }
-
+        .progress-bar-wrap.active{ display:block; }
         .progress-bar-fill{
             width:0;
             height:100%;
@@ -614,7 +487,6 @@
         }
 
         /* ================= UPSCALER ================= */
-
         .drop-zone{
             border:2px dashed #cbd5e1;
             background:white;
@@ -624,43 +496,28 @@
             transition:var(--transition);
             cursor:pointer;
         }
-
         .drop-zone:hover{
             border-color:#7dd3fc;
             background:#f0fdff;
         }
-
         .drop-icon{
             font-size:3rem;
             margin-bottom:14px;
         }
-
-        .drop-zone input{
-            display:none;
-        }
-
-        .image-preview-area{
-            display:none;
-            margin-top:26px;
-        }
-
-        .image-preview-area.show{
-            display:block;
-        }
-
+        .drop-zone input{ display:none; }
+        .image-preview-area{ display:none; margin-top:26px; }
+        .image-preview-area.show{ display:block; }
         .image-compare{
             display:grid;
             grid-template-columns:1fr 1fr;
             gap:18px;
         }
-
         .image-box{
             background:white;
             border:1px solid var(--border);
             border-radius:20px;
             padding:16px;
         }
-
         .image-box img{
             width:100%;
             border-radius:14px;
@@ -668,19 +525,16 @@
             object-fit:contain;
             background:#f8fafc;
         }
-
         .label{
             font-size:.85rem;
             font-weight:700;
             margin-bottom:12px;
         }
-
         .resolution{
             margin-top:10px;
             font-size:.8rem;
             color:var(--text-light);
         }
-
         .upscale-actions{
             margin-top:20px;
             display:flex;
@@ -689,18 +543,13 @@
         }
 
         /* ================= ABOUT ================= */
-
-        .about{
-            padding:90px 0;
-        }
-
+        .about{ padding:90px 0; }
         .about-grid{
             display:grid;
             grid-template-columns:1fr 1fr;
             gap:40px;
             align-items:center;
         }
-
         .about-image{
             background:white;
             border-radius:32px;
@@ -708,95 +557,56 @@
             border:1px solid var(--border);
             box-shadow:var(--shadow-md);
         }
-
-        .about-image img{
-            width:100%;
-            height:100%;
-            object-fit:cover;
-        }
-
+        .about-image img{ width:100%; height:100%; object-fit:cover; }
         .about-content h2{
             font-size:2.3rem;
             line-height:1.2;
             letter-spacing:-.04em;
             margin-bottom:20px;
         }
-
         .about-content p{
             color:var(--text-soft);
             line-height:1.9;
             margin-bottom:18px;
         }
-
         .stats{
             display:grid;
             grid-template-columns:repeat(3,1fr);
             gap:14px;
             margin-top:28px;
         }
-
         .stat{
             background:white;
             border:1px solid var(--border);
             border-radius:20px;
             padding:22px;
         }
-
-        .stat strong{
-            display:block;
-            font-size:1.7rem;
-            margin-bottom:6px;
-        }
-
-        .stat span{
-            color:var(--text-light);
-            font-size:.9rem;
-        }
+        .stat strong{ display:block; font-size:1.7rem; margin-bottom:6px; }
+        .stat span{ color:var(--text-light); font-size:.9rem; }
 
         /* ================= FOOTER ================= */
-
         .footer{
             background:#0f172a;
             color:#cbd5e1;
             padding:70px 0 30px;
             margin-top:80px;
         }
-
         .footer-grid{
             display:grid;
             grid-template-columns:2fr 1fr 1fr 1fr;
             gap:40px;
             margin-bottom:50px;
         }
-
-        .footer-brand h3{
-            color:white;
-            font-size:1.4rem;
-            margin-bottom:16px;
-        }
-
-        .footer-brand p{
-            line-height:1.9;
-            color:#94a3b8;
-            max-width:420px;
-        }
-
-        .footer-links h4{
-            color:white;
-            margin-bottom:16px;
-        }
-
+        .footer-brand h3{ color:white; font-size:1.4rem; margin-bottom:16px; }
+        .footer-brand p{ line-height:1.9; color:#94a3b8; max-width:420px; }
+        .footer-links h4{ color:white; margin-bottom:16px; }
         .footer-links a{
             display:block;
             margin-bottom:12px;
             color:#94a3b8;
             transition:var(--transition);
         }
-
-        .footer-links a:hover{
-            color:white;
-        }
-
+        .footer-links a:hover{ color:white; }
         .footer-bottom{
             border-top:1px solid rgba(255,255,255,.08);
             padding-top:24px;
@@ -806,7 +616,6 @@
         }
 
         /* ================= TOAST ================= */
-
         .toast-container{
             position:fixed;
             top:20px;
@@ -816,7 +625,6 @@
             flex-direction:column;
             gap:10px;
         }
-
         .toast{
             padding:14px 20px;
             border-radius:16px;
@@ -825,30 +633,13 @@
             animation:slide .3s ease;
             box-shadow:var(--shadow-lg);
         }
-
-        .toast.success{
-            background:#10b981;
-        }
-
-        .toast.error{
-            background:#ef4444;
-        }
-
-        .toast.info{
-            background:#0891b2;
-        }
-
+        .toast.success{ background:#10b981; }
+        .toast.error{ background:#ef4444; }
+        .toast.info{ background:#0891b2; }
         @keyframes slide{
-            from{
-                opacity:0;
-                transform:translateX(50px);
-            }
-            to{
-                opacity:1;
-                transform:translateX(0);
-            }
+            from{ opacity:0; transform:translateX(50px); }
+            to{ opacity:1; transform:translateX(0); }
         }
-
         .spinner{
             width:18px;
             height:18px;
@@ -858,146 +649,47 @@
             animation:spin .7s linear infinite;
             display:inline-block;
         }
-
-        @keyframes spin{
-            to{
-                transform:rotate(360deg);
-            }
-        }
+        @keyframes spin{ to{ transform:rotate(360deg); } }
 
         /* ================= RESPONSIVE ================= */
-
         @media(max-width:980px){
-
             .hero-grid,
             .tool-grid,
             .about-grid,
-            .footer-grid{
-                grid-template-columns:1fr;
-            }
-
-            .feature-strip{
-                grid-template-columns:1fr;
-            }
-
-            .stats{
-                grid-template-columns:1fr;
-            }
-
-            .image-compare{
-                grid-template-columns:1fr;
-            }
+            .footer-grid{ grid-template-columns:1fr; }
+            .feature-strip{ grid-template-columns:1fr; }
+            .stats{ grid-template-columns:1fr; }
+            .image-compare{ grid-template-columns:1fr; }
         }
-
         @media(max-width:720px){
-
-            .nav-links{
-                display:none;
-            }
-
-            .hero{
-                padding-top:60px;
-            }
-
-            .tool-card{
-                padding:20px;
-            }
-
-            .input-group{
-                flex-direction:column;
-            }
-
-            .fetch-btn{
-                height:54px;
-            }
-
+            .nav-links{ display:none; }
+            .hero{ padding-top:60px; }
+            .tool-card{ padding:20px; }
+            .input-group{ flex-direction:column; }
+            .fetch-btn{ height:54px; }
             .platform-selector{
                 overflow:auto;
                 flex-wrap:nowrap;
                 padding-bottom:5px;
             }
-
-            .platform-btn{
-                min-width:max-content;
-            }
-
-            .hero h1{
-                font-size:2.6rem;
-            }
-            
-        html,
-body{
-    overflow-x:hidden;
-}
-
-.container,
-.tool-card,
-.panel,
-.preview-card,
-.preview-content,
-.preview-meta,
-.preview-content h3{
-    min-width:0;
-}
-
-.preview-content h3{
-    overflow-wrap:anywhere;
-    word-break:break-word;
-}
-
-.preview-meta{
-    overflow-wrap:anywhere;
-}
-
-.preview-thumb{
-    width:100%;
-    max-width:100%;
-}
-
-.result-area{
-    width:100%;
-    overflow:hidden;
-}
-
-.download-btns{
-    width:100%;
-}
-
-.download-btns .btn{
-    flex:1;
-    justify-content:center;
-}
-
-@media(max-width:640px){
-
-    .tool-card{
-        overflow:hidden;
-    }
-
-    .preview-card{
-        overflow:hidden;
-    }
-
-    .preview-content{
-        padding:16px;
-    }
-
-    .download-btns{
-        flex-direction:column;
-    }
-
-    .download-btns .btn{
-        width:100%;
-    }
-
-    .platform-selector{
-        scrollbar-width:none;
-    }
-
-    .platform-selector::-webkit-scrollbar{
-        display:none;
-    }
-}
+            .platform-btn{ min-width:max-content; }
+            .hero h1{ font-size:2.6rem; }
+        }
+        @media(max-width:640px){
+            .tool-card{ overflow:hidden; }
+            .preview-card{ overflow:hidden; }
+            .preview-content{ padding:16px; }
+            .download-btns{ flex-direction:column; }
+            .download-btns .btn{ width:100%; justify-content:center; }
+            .platform-selector{ scrollbar-width:none; }
+            .platform-selector::-webkit-scrollbar{ display:none; }
+        }
+        html, body{ overflow-x:hidden; }
+        .container, .tool-card, .panel, .preview-card, .preview-content, .preview-meta, .preview-content h3{ min-width:0; }
+        .preview-thumb{ width:100%; max-width:100%; }
+        .result-area{ width:100%; overflow:hidden; }
+        .download-btns{ width:100%; }
+        .download-btns .btn{ flex:1; justify-content:center; }
     </style>
 </head>
 <body>
@@ -1005,372 +697,190 @@ body{
     <!-- NAVBAR -->
     <nav class="navbar">
         <div class="container nav-inner">
-
             <div class="logo">
                 <div class="logo-badge">S</div>
                 S-CONVERTER
             </div>
-
             <div class="nav-links">
                 <a href="#tools">Tools</a>
                 <a href="#about">About</a>
                 <a href="#features">Features</a>
                 <a href="#contact">Contact</a>
             </div>
-
             <a href="#tools" class="nav-cta">Start Converting</a>
-
         </div>
     </nav>
 
     <!-- HERO -->
     <section class="hero">
-
         <div class="container">
-
             <div class="hero-grid">
-
                 <div>
-
                     <div class="hero-badge">
                         <span></span>
                         Fast • Clean • Professional Media Tools
                     </div>
-
-                    <h1>
-                        Convert videos and upscale images with a cleaner workflow.
-                    </h1>
-
-                    <p>
-                        S-CONVERTER is a modern all-in-one media utility designed for fast video downloading, format conversion, and AI-powered image enhancement — built with a clean experience focused on simplicity and performance.
-                    </p>
-
+                    <h1>Convert videos and upscale images with a cleaner workflow.</h1>
+                    <p>S-CONVERTER is a modern all-in-one media utility designed for fast video downloading, format conversion, and AI-powered image enhancement — built with a clean experience focused on simplicity and performance.</p>
                     <div class="hero-actions">
                         <a href="#tools" class="btn btn-primary">Start Using Tools</a>
                         <a href="#about" class="btn btn-secondary">Learn More</a>
                     </div>
-
                     <div class="feature-strip" id="features">
-
                         <div class="feature-mini">
                             <div class="mini-icon">⚡</div>
                             <h4>Fast Processing</h4>
                             <p>Quick video fetching and optimized downloads for a smoother experience.</p>
                         </div>
-
                         <div class="feature-mini">
                             <div class="mini-icon">🎞️</div>
                             <h4>Multi Platform</h4>
                             <p>Supports YouTube, TikTok, Facebook, MP4 video, and MP3 audio formats.</p>
                         </div>
-
                         <div class="feature-mini">
                             <div class="mini-icon">🖼️</div>
                             <h4>AI Upscaling</h4>
                             <p>Enhance low-resolution images into sharper and cleaner high-quality output.</p>
                         </div>
-
                     </div>
-
                 </div>
-
                 <div>
-
                     <div class="hero-card">
-
                         <div class="hero-preview">
                             <img src="https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?q=80&w=1400&auto=format&fit=crop" alt="preview">
-
                             <div class="hero-floating">
                                 <small>Current Workflow</small>
                                 <strong>4K AI Upscaling Ready</strong>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </section>
 
     <!-- MAIN TOOL -->
     <section class="tool-section" id="tools">
-
         <div class="container">
-
             <div class="section-heading">
                 <h2>Professional Media Toolkit</h2>
-                <p>
-                    Download videos, convert audio, and enhance images using a streamlined modern interface built for daily use.
-                </p>
+                <p>Download videos, convert audio, and enhance images using a streamlined modern interface built for daily use.</p>
             </div>
-
             <div class="tool-card">
-
                 <!-- PLATFORM -->
                 <div class="platform-selector">
-
-    <button class="platform-btn active" id="btnYt" data-platform="youtube">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8ZM9.6 15.5v-7L16 12l-6.4 3.5Z"/>
-        </svg>
-
-        YouTube
-
-        <span class="badge">MP4 / MP3</span>
-    </button>
-
-    <button class="platform-btn" id="btnFb" data-platform="facebook">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9v-2.9h2.5V9.7c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.7-1.6 1.5v1.8h2.8l-.5 2.9h-2.3v7A10 10 0 0 0 22 12"/>
-        </svg>
-
-        Facebook
-
-        <span class="badge">MP4</span>
-    </button>
-
-    <button class="platform-btn" id="btnTt" data-platform="tiktok">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M19.6 8.7a7.8 7.8 0 0 1-4.6-1.5v6.9a5.6 5.6 0 1 1-5.6-5.6c.3 0 .7 0 1 .1v2.8a2.7 2.7 0 1 0 1.8 2.6V2h2.8a4.9 4.9 0 0 0 4.6 4.6v2.1Z"/>
-        </svg>
-
-        TikTok
-
-        <span class="badge">MP4</span>
-    </button>
-
-</div>
+                    <button class="platform-btn active" id="btnYt" data-platform="youtube">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8ZM9.6 15.5v-7L16 12l-6.4 3.5Z"/></svg>
+                        YouTube
+                        <span class="badge">MP4 / MP3</span>
+                    </button>
+                    <button class="platform-btn" id="btnFb" data-platform="facebook">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7H7.9v-2.9h2.5V9.7c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.2.2 2.2.2v2.4h-1.2c-1.2 0-1.6.7-1.6 1.5v1.8h2.8l-.5 2.9h-2.3v7A10 10 0 0 0 22 12"/></svg>
+                        Facebook
+                        <span class="badge">MP4</span>
+                    </button>
+                    <button class="platform-btn" id="btnTt" data-platform="tiktok">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M19.6 8.7a7.8 7.8 0 0 1-4.6-1.5v6.9a5.6 5.6 0 1 1-5.6-5.6c.3 0 .7 0 1 .1v2.8a2.7 2.7 0 1 0 1.8 2.6V2h2.8a4.9 4.9 0 0 0 4.6 4.6v2.1Z"/></svg>
+                        TikTok
+                        <span class="badge">MP4</span>
+                    </button>
+                </div>
 
                 <div class="tool-grid">
-
                     <!-- VIDEO PANEL -->
                     <div class="panel">
-
-                        <div class="panel-title" id="converterTitle">
-                            YouTube Video Converter
-                        </div>
-
+                        <div class="panel-title" id="converterTitle">YouTube Video Converter</div>
                         <div class="input-group">
                             <input type="text" id="videoUrl" placeholder="Paste your video link here...">
-                            <button class="btn fetch-btn" id="btnFetch">
-                                <span id="fetchText">Fetch Info</span>
-                            </button>
+                            <button class="btn fetch-btn" id="btnFetch"><span id="fetchText">Fetch Info</span></button>
                         </div>
-
                         <div class="format-selector" id="formatSelector">
                             <button class="format-option selected" data-format="mp4">MP4</button>
                             <button class="format-option" data-format="mp3">MP3</button>
                             <button class="format-option" data-format="mp4_hd">MP4 HD</button>
                         </div>
-
-                        <div class="progress-bar-wrap" id="progressBar">
-                            <div class="progress-bar-fill" id="progressFill"></div>
-                        </div>
-
+                        <div class="progress-bar-wrap" id="progressBar"><div class="progress-bar-fill" id="progressFill"></div></div>
                         <div class="result-area" id="resultArea">
-
                             <div class="preview-card">
-
                                 <img class="preview-thumb" id="previewThumb" src="" alt="Preview">
-
                                 <div class="preview-content">
-
                                     <h3 id="previewTitle">Video Title</h3>
-
-                                    <div class="preview-meta" id="previewMeta">
-                                        Duration: -- | Format: --
-                                    </div>
-
+                                    <div class="preview-meta" id="previewMeta">Duration: -- | Format: --</div>
                                     <div class="download-btns">
-                                        <button class="btn btn-download" id="btnDownload">
-                                            Download
-                                        </button>
-
-                                        <button class="btn btn-outline" id="btnClearResult">
-                                            Clear
-                                        </button>
+                                        <button class="btn btn-download" id="btnDownload">Download</button>
+                                        <button class="btn btn-outline" id="btnClearResult">Clear</button>
                                     </div>
-
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
-
                     <!-- UPSCALER -->
                     <div class="panel">
-
-                        <div class="panel-title">
-                            AI Image Upscaler
-                        </div>
-
+                        <div class="panel-title">AI Image Upscaler</div>
                         <div class="drop-zone" id="dropZone">
-
                             <div class="drop-icon">🖼️</div>
-
-                            <h3 style="margin-bottom:10px;">
-                                Upload an Image
-                            </h3>
-
-                            <p style="color:var(--text-light); line-height:1.8;">
-                                Drag & drop or select JPG, PNG, or WebP files to upscale your image into higher resolution quality.
-                            </p>
-
+                            <h3 style="margin-bottom:10px;">Upload an Image</h3>
+                            <p style="color:var(--text-light); line-height:1.8;">Drag & drop or select JPG, PNG, or WebP files to upscale your image into higher resolution quality.</p>
                             <input type="file" id="imageInput" accept="image/*">
-
                         </div>
-
                         <div class="image-preview-area" id="imagePreviewArea">
-
                             <div class="image-compare">
-
                                 <div class="image-box">
                                     <div class="label">Original</div>
                                     <img id="originalImage" src="" alt="">
                                     <div class="resolution" id="originalRes"></div>
                                 </div>
-
                                 <div class="image-box">
                                     <div class="label">Upscaled</div>
                                     <img id="upscaledImage" src="" alt="">
                                     <div class="resolution" id="upscaledRes"></div>
                                 </div>
-
                             </div>
-
                             <div class="upscale-actions">
-
-                                <button class="btn btn-primary" id="btnUpscale">
-                                    AI Upscale to 4K
-                                </button>
-
-                                <button class="btn btn-download" id="btnDownloadUpscaled" style="display:none;">
-                                    Download Image
-                                </button>
-
-                                <button class="btn btn-outline" id="btnClearImage">
-                                    Clear
-                                </button>
-
+                                <button class="btn btn-primary" id="btnUpscale">AI Upscale to 4K</button>
+                                <button class="btn btn-download" id="btnDownloadUpscaled" style="display:none;">Download Image</button>
+                                <button class="btn btn-outline" id="btnClearImage">Clear</button>
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </section>
 
     <!-- ABOUT -->
     <section class="about" id="about">
-
         <div class="container">
-
             <div class="about-grid">
-
-                <div class="about-image">
-                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400&auto=format&fit=crop" alt="">
-                </div>
-
+                <div class="about-image"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=1400&auto=format&fit=crop" alt=""></div>
                 <div class="about-content">
-
-                    <h2>
-                        Built for a cleaner and more professional media experience.
-                    </h2>
-
-                    <p>
-                        S-CONVERTER was designed to simplify media conversion without cluttered layouts or complicated workflows. Every section is structured for fast access, smooth interaction, and modern visual consistency.
-                    </p>
-
-                    <p>
-                        Whether you are downloading videos, extracting audio, or enhancing image quality, the platform focuses on performance, usability, and a seamless user experience across desktop and mobile devices.
-                    </p>
-
+                    <h2>Built for a cleaner and more professional media experience.</h2>
+                    <p>S-CONVERTER was designed to simplify media conversion without cluttered layouts or complicated workflows. Every section is structured for fast access, smooth interaction, and modern visual consistency.</p>
+                    <p>Whether you are downloading videos, extracting audio, or enhancing image quality, the platform focuses on performance, usability, and a seamless user experience across desktop and mobile devices.</p>
                     <div class="stats">
-
-                        <div class="stat">
-                            <strong>4K</strong>
-                            <span>AI Upscaling Support</span>
-                        </div>
-
-                        <div class="stat">
-                            <strong>3+</strong>
-                            <span>Supported Platforms</span>
-                        </div>
-
-                        <div class="stat">
-                            <strong>Fast</strong>
-                            <span>Modern Optimized UI</span>
-                        </div>
-
+                        <div class="stat"><strong>4K</strong><span>AI Upscaling Support</span></div>
+                        <div class="stat"><strong>3+</strong><span>Supported Platforms</span></div>
+                        <div class="stat"><strong>Fast</strong><span>Modern Optimized UI</span></div>
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </section>
 
     <!-- FOOTER -->
     <footer class="footer" id="contact">
-
         <div class="container">
-
             <div class="footer-grid">
-
                 <div class="footer-brand">
-
                     <h3>S-CONVERTER</h3>
-
-                    <p>
-                        Modern media conversion and AI image enhancement tools built with a focus on simplicity, speed, and professional design.
-                    </p>
-
+                    <p>Modern media conversion and AI image enhancement tools built with a focus on simplicity, speed, and professional design.</p>
                 </div>
-
-                <div class="footer-links">
-                    <h4>Platform</h4>
-                    <a href="#">Converter</a>
-                    <a href="#">AI Upscaler</a>
-                    <a href="#">Downloads</a>
-                </div>
-
-                <div class="footer-links">
-                    <h4>Resources</h4>
-                    <a href="#">Help Center</a>
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                </div>
-
-                <div class="footer-links">
-                    <h4>Contact</h4>
-                    <a href="#">nopvisal57@gmail.com</a>
-                    <a href="#">099 941 633</a>
-                    <a href="#">Nop Visal</a>
-                </div>
-
+                <div class="footer-links"><h4>Platform</h4><a href="#">Converter</a><a href="#">AI Upscaler</a><a href="#">Downloads</a></div>
+                <div class="footer-links"><h4>Resources</h4><a href="#">Help Center</a><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+                <div class="footer-links"><h4>Contact</h4><a href="#">nopvisal57@gmail.com</a><a href="#">099 941 633</a><a href="#">Nop Visal</a></div>
             </div>
-
-            <div class="footer-bottom">
-                © 2026 S-CONVERTER. All rights reserved.
-            </div>
-
+            <div class="footer-bottom">© 2026 S-CONVERTER. All rights reserved.</div>
         </div>
-
     </footer>
 
     <div class="toast-container" id="toastContainer"></div>
@@ -1395,15 +905,12 @@ body{
             const dom = {
                 btnYt: $('#btnYt'), btnFb: $('#btnFb'), btnTt: $('#btnTt'),
                 converterTitle: $('#converterTitle'), videoUrl: $('#videoUrl'), btnFetch: $('#btnFetch'),
-                fetchText: $('#fetchText'),
-                formatSelector: $('#formatSelector'), resultArea: $('#resultArea'),
-                previewThumb: $('#previewThumb'), previewTitle: $('#previewTitle'),
-                previewMeta: $('#previewMeta'), btnDownload: $('#btnDownload'),
-                btnClearResult: $('#btnClearResult'), progressBar: $('#progressBar'),
-                progressFill: $('#progressFill'), dropZone: $('#dropZone'),
-                imageInput: $('#imageInput'), imagePreviewArea: $('#imagePreviewArea'),
-                originalImage: $('#originalImage'), upscaledImage: $('#upscaledImage'),
-                originalRes: $('#originalRes'), upscaledRes: $('#upscaledRes'),
+                fetchText: $('#fetchText'), formatSelector: $('#formatSelector'), resultArea: $('#resultArea'),
+                previewThumb: $('#previewThumb'), previewTitle: $('#previewTitle'), previewMeta: $('#previewMeta'),
+                btnDownload: $('#btnDownload'), btnClearResult: $('#btnClearResult'), progressBar: $('#progressBar'),
+                progressFill: $('#progressFill'), dropZone: $('#dropZone'), imageInput: $('#imageInput'),
+                imagePreviewArea: $('#imagePreviewArea'), originalImage: $('#originalImage'),
+                upscaledImage: $('#upscaledImage'), originalRes: $('#originalRes'), upscaledRes: $('#upscaledRes'),
                 btnUpscale: $('#btnUpscale'), btnDownloadUpscaled: $('#btnDownloadUpscaled'),
                 btnClearImage: $('#btnClearImage'), toastContainer: $('#toastContainer'),
             };
@@ -1420,11 +927,9 @@ body{
             // Platform switching
             function switchPlatform(platform) {
                 state.platform = platform;
-                state.videoInfo = null;
-                state.directUrl = null;
+                state.videoInfo = null; state.directUrl = null;
                 state.format = platform === 'youtube' ? 'mp4' : 'mp4';
                 clearResult(false);
-
                 [dom.btnYt, dom.btnFb, dom.btnTt].forEach(b => b.classList.remove('active'));
                 if (platform === 'youtube') {
                     dom.btnYt.classList.add('active');
@@ -1438,14 +943,10 @@ body{
                     dom.formatSelector.style.display = 'none';
                 }
                 dom.converterTitle.textContent = {
-                    youtube: 'YouTube Video Converter',
-                    facebook: 'Facebook Video Converter',
-                    tiktok: 'TikTok Video Converter',
+                    youtube:'YouTube Video Converter', facebook:'Facebook Video Converter', tiktok:'TikTok Video Converter'
                 }[platform];
                 dom.videoUrl.placeholder = {
-                    youtube: 'Paste your YouTube video link here...',
-                    facebook: 'Paste your Facebook video link here...',
-                    tiktok: 'Paste your TikTok video link here...',
+                    youtube:'Paste your YouTube video link...', facebook:'Paste your Facebook video link...', tiktok:'Paste your TikTok video link...'
                 }[platform];
                 dom.resultArea.classList.remove('show');
                 dom.videoUrl.value = '';
@@ -1459,44 +960,35 @@ body{
                 state.format = format;
             }
 
-            dom.btnYt.addEventListener('click', () => switchPlatform('youtube'));
-            dom.btnFb.addEventListener('click', () => switchPlatform('facebook'));
-            dom.btnTt.addEventListener('click', () => switchPlatform('tiktok'));
-
+            dom.btnYt.addEventListener('click', ()=>switchPlatform('youtube'));
+            dom.btnFb.addEventListener('click', ()=>switchPlatform('facebook'));
+            dom.btnTt.addEventListener('click', ()=>switchPlatform('tiktok'));
             document.querySelectorAll('.format-option').forEach(btn => {
-                btn.addEventListener('click', () => {
+                btn.addEventListener('click', ()=>{
                     setFormatButtons(btn.dataset.format);
                     if (state.videoInfo) fetchVideoInfo();
                 });
             });
 
-            // Progress
             function setProgress(percent) {
                 dom.progressBar.classList.add('active');
                 dom.progressFill.style.width = percent + '%';
-                if (percent >= 100) setTimeout(() => {
-                    dom.progressBar.classList.remove('active');
-                    dom.progressFill.style.width = '0%';
-                }, 700);
+                if (percent >= 100) setTimeout(() => { dom.progressBar.classList.remove('active'); dom.progressFill.style.width = '0%'; }, 700);
             }
 
             // Fetch video info
             async function fetchVideoInfo() {
                 const url = dom.videoUrl.value.trim();
                 if (!url) return showToast('Paste a link first.', 'error');
-
                 if (/youtube\.com|youtu\.be/.test(url)) switchPlatform('youtube');
                 else if (/facebook\.com|fb\.watch/.test(url)) switchPlatform('facebook');
                 else if (/tiktok\.com/.test(url)) switchPlatform('tiktok');
                 else return showToast('Unsupported URL.', 'error');
-
-                state.videoInfo = null;
-                state.directUrl = null;
+                state.videoInfo = null; state.directUrl = null;
                 dom.resultArea.classList.remove('show');
                 dom.btnFetch.disabled = true;
                 dom.fetchText.innerHTML = '<span class="spinner"></span> Fetching...';
                 setProgress(20);
-
                 try {
                     let data;
                     if (state.platform === 'youtube') {
@@ -1512,33 +1004,20 @@ body{
                         if (!resp.ok) throw new Error((await resp.json()).error);
                         data = await resp.json();
                     }
-
-                    state.videoInfo = {
-                        title: data.title,
-                        thumbnail: data.thumbnail,
-                        duration: data.duration,
-                        author: data.author,
-                        quality: data.quality,
-                    };
+                    state.videoInfo = { title: data.title, thumbnail: data.thumbnail, duration: data.duration, author: data.author, quality: data.quality };
                     state.directUrl = data.downloadUrl;
-
                     dom.previewThumb.src = state.videoInfo.thumbnail || '';
                     dom.previewTitle.textContent = state.videoInfo.title || 'Video';
-                    let meta = `Format: ${state.format === 'mp3' ? 'MP3' : 'MP4'}`;
+                    let meta = `Format: ${state.format==='mp3'?'MP3':'MP4'}`;
                     if (state.videoInfo.duration) meta += ` | Duration: ${state.videoInfo.duration}`;
                     if (state.videoInfo.author) meta += ` | @${state.videoInfo.author}`;
                     dom.previewMeta.textContent = meta;
                     dom.resultArea.classList.add('show');
-                    dom.btnDownload.textContent = state.format === 'mp3' ? '⬇️ Download MP3' : '⬇️ Download MP4';
+                    dom.btnDownload.textContent = state.format==='mp3'?'⬇️ Download MP3':'⬇️ Download MP4';
                     showToast('Ready! Click Download.', 'success');
                     setProgress(100);
-                } catch (err) {
-                    showToast(err.message, 'error');
-                    setProgress(0);
-                } finally {
-                    dom.btnFetch.disabled = false;
-                    dom.fetchText.innerHTML = '⚡ Fetch Info';
-                }
+                } catch (err) { showToast(err.message, 'error'); setProgress(0); }
+                finally { dom.btnFetch.disabled = false; dom.fetchText.innerHTML = '⚡ Fetch Info'; }
             }
 
             // Download media
@@ -1546,7 +1025,6 @@ body{
                 if (!state.directUrl) return showToast('Fetch info first.', 'error');
                 dom.btnDownload.disabled = true;
                 dom.btnDownload.innerHTML = '<span class="spinner"></span> Downloading...';
-
                 try {
                     const resp = await fetch(state.directUrl);
                     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
@@ -1554,30 +1032,21 @@ body{
                     const blobUrl = URL.createObjectURL(blob);
                     const a = document.createElement('a');
                     a.href = blobUrl;
-                    const ext = state.format === 'mp3' ? 'mp3' : 'mp4';
-                    const name = (state.videoInfo?.title || 'download')
-                        .replace(/[^a-zA-Z0-9\s]/g, '')
-                        .substring(0, 60)
-                        .trim() || 'video';
+                    const ext = state.format==='mp3'?'mp3':'mp4';
+                    const name = (state.videoInfo?.title||'download').replace(/[^a-zA-Z0-9\s]/g,'').substring(0,60).trim()||'video';
                     a.download = `${name}.${ext}`;
-                    document.body.appendChild(a);
-                    a.click();
-                    document.body.removeChild(a);
+                    document.body.appendChild(a); a.click(); document.body.removeChild(a);
                     setTimeout(() => URL.revokeObjectURL(blobUrl), 5000);
                     showToast('Download complete! ✅', 'success');
                 } catch (err) {
                     console.error(err);
                     window.open(state.directUrl, '_blank');
                     showToast('Opening in new tab...', 'info');
-                } finally {
-                    dom.btnDownload.disabled = false;
-                    dom.btnDownload.innerHTML = state.format === 'mp3' ? '⬇️ Download MP3' : '⬇️ Download MP4';
-                }
+                } finally { dom.btnDownload.disabled = false; dom.btnDownload.innerHTML = state.format==='mp3'?'⬇️ Download MP3':'⬇️ Download MP4'; }
             }
 
             function clearResult(clearInput = true) {
-                state.videoInfo = null;
-                state.directUrl = null;
+                state.videoInfo = null; state.directUrl = null;
                 dom.resultArea.classList.remove('show');
                 dom.previewThumb.src = '';
                 dom.previewTitle.textContent = 'Video Title';
@@ -1592,19 +1061,232 @@ body{
             dom.btnFetch.addEventListener('click', fetchVideoInfo);
             dom.btnDownload.addEventListener('click', downloadMedia);
             dom.btnClearResult.addEventListener('click', () => clearResult(true));
-            dom.videoUrl.addEventListener('keydown', (e) => { if (e.key === 'Enter') fetchVideoInfo(); });
+            dom.videoUrl.addEventListener('keydown', e => { if (e.key==='Enter') fetchVideoInfo(); });
 
-            // ==================== IMAGE UPSCALER (unchanged logic) ====================
+            // ==================== IMAGE UPSCALER ====================
             let upscaler = null;
             let modelLoading = false;
 
-            async function loadUpscaler() { /* identical to original */ }
-            async function upscaleImage() { /* identical to original */ }
-            function oldUpscaleImage() { /* identical to original */ }
-            function stepwiseUpscale(img, w, h) { /* identical to original */ }
-            function applySharpen(canvas) { /* identical to original */ }
+            dom.dropZone.addEventListener('click', () => dom.imageInput.click());
+            dom.dropZone.addEventListener('dragover', e => { e.preventDefault(); dom.dropZone.classList.add('dragover'); });
+            dom.dropZone.addEventListener('dragleave', () => dom.dropZone.classList.remove('dragover'));
+            dom.dropZone.addEventListener('drop', e => {
+                e.preventDefault();
+                dom.dropZone.classList.remove('dragover');
+                const file = e.dataTransfer.files[0];
+                if (file && file.type.startsWith('image/')) processImage(file);
+                else showToast('Drop an image file.', 'error');
+            });
+            dom.imageInput.addEventListener('change', e => { if (e.target.files[0]) processImage(e.target.files[0]); });
 
-            // Initialize
+            function processImage(file) {
+                if (file.size > 50*1024*1024) return showToast('Max 50MB allowed.', 'error');
+                const reader = new FileReader();
+                reader.onload = e => {
+                    const img = new Image();
+                    img.onload = () => {
+                        state.originalImageData = { src: e.target.result, width: img.width, height: img.height, file };
+                        state.upscaledImageData = null;
+                        dom.originalImage.src = e.target.result;
+                        dom.originalRes.textContent = `${img.width} × ${img.height} px (${(file.size/1024).toFixed(1)} KB)`;
+                        dom.upscaledImage.src = '';
+                        dom.upscaledRes.textContent = 'Not yet upscaled';
+                        dom.imagePreviewArea.classList.add('show');
+                        dom.btnUpscale.style.display = 'inline-flex';
+                        dom.btnDownloadUpscaled.style.display = 'none';
+                        dom.dropZone.style.display = 'none';
+                        showToast('Image loaded! Click AI Upscale.', 'info');
+                    };
+                    img.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+
+            async function loadUpscaler() {
+                if (upscaler) return upscaler;
+                if (modelLoading) {
+                    await new Promise(resolve => { const check = setInterval(() => { if (upscaler||!modelLoading){ clearInterval(check); resolve(); } }, 200); });
+                    return upscaler;
+                }
+                modelLoading = true;
+                showToast('Loading AI model... (~5s first time)', 'info');
+                dom.btnUpscale.disabled = true;
+                dom.btnUpscale.innerHTML = '<span class="spinner"></span> Loading model...';
+                try {
+                    const ESRGANClass = window.UpscalerJS?.ESRGAN;
+                    if (!ESRGANClass) throw new Error('ESRGAN model not found');
+                    upscaler = new ESRGANClass({ patchSize: 128, padding: 4 });
+                    await upscaler.load();
+                    showToast('AI model ready!', 'success');
+                } catch (err) {
+                    console.error('Model load error:', err);
+                    showToast('Could not load AI model. Using basic upscaler.', 'error');
+                    upscaler = null;
+                } finally {
+                    modelLoading = false;
+                    dom.btnUpscale.disabled = false;
+                    dom.btnUpscale.innerHTML = '🚀 AI Upscale to 4K';
+                }
+                return upscaler;
+            }
+
+            async function aiUpscale() {
+                if (!state.originalImageData) return showToast('Upload an image first.', 'error');
+                if (state.isProcessing) return;
+                const model = await loadUpscaler();
+                if (!model) { classicUpscale(); return; }
+                state.isProcessing = true;
+                dom.btnUpscale.disabled = true;
+                dom.btnUpscale.innerHTML = '<span class="spinner"></span> AI Upscaling...';
+                try {
+                    const img = new Image();
+                    img.src = state.originalImageData.src;
+                    await new Promise((resolve, reject) => { img.onload = resolve; img.onerror = reject; });
+                    const MAX = 3840;
+                    const aspect = img.width / img.height;
+                    let tw, th;
+                    if (aspect >= 1) { tw = MAX; th = Math.round(MAX/aspect); }
+                    else { th = MAX; tw = Math.round(MAX*aspect); }
+                    const reqScale = Math.max(tw/img.width, th/img.height);
+                    const scaleF = reqScale <= 2 ? 2 : reqScale <= 3 ? 3 : 4;
+                    const upscaled = await upscaler.upscale(img, { output: 'canvas', scale: scaleF });
+                    let finalCanvas = upscaled;
+                    if (upscaled.width > tw || upscaled.height > th) {
+                        finalCanvas = document.createElement('canvas');
+                        finalCanvas.width = tw; finalCanvas.height = th;
+                        const ctx = finalCanvas.getContext('2d');
+                        ctx.imageSmoothingEnabled = true;
+                        ctx.drawImage(upscaled, 0, 0, tw, th);
+                    }
+                    const resultUrl = finalCanvas.toDataURL('image/jpeg', 0.92);
+                    state.upscaledImageData = { src: resultUrl, width: finalCanvas.width, height: finalCanvas.height };
+                    dom.upscaledImage.src = resultUrl;
+                    dom.upscaledRes.textContent = `${finalCanvas.width} × ${finalCanvas.height} px (AI Enhanced)`;
+                    dom.btnDownloadUpscaled.style.display = 'inline-flex';
+                    dom.btnUpscale.style.display = 'none';
+                    showToast(`AI upscaled to ${finalCanvas.width}×${finalCanvas.height}! 🎉`, 'success');
+                } catch (err) {
+                    console.error('AI upscale error:', err);
+                    showToast('AI upscale failed. Using basic method.', 'error');
+                    classicUpscale();
+                } finally {
+                    state.isProcessing = false;
+                    dom.btnUpscale.disabled = false;
+                    dom.btnUpscale.innerHTML = '🚀 AI Upscale to 4K';
+                }
+            }
+
+            function classicUpscale() {
+                if (!state.originalImageData) return;
+                if (state.isProcessing) return;
+                state.isProcessing = true;
+                dom.btnUpscale.disabled = true;
+                dom.btnUpscale.innerHTML = '<span class="spinner"></span> Upscaling...';
+                setTimeout(() => {
+                    try {
+                        const img = new Image();
+                        img.onload = () => {
+                            const MAX = 3840;
+                            const aspect = img.width / img.height;
+                            let w, h;
+                            if (aspect >= 1) { w = MAX; h = Math.round(MAX/aspect); }
+                            else { h = MAX; w = Math.round(MAX*aspect); }
+                            if (w < 800) w = 800; if (h < 600) h = 600;
+                            const result = stepwiseUpscale(img, w, h);
+                            state.upscaledImageData = { src: result, width: w, height: h };
+                            dom.upscaledImage.src = result;
+                            dom.upscaledRes.textContent = `${w} × ${h} px (Basic)`;
+                            dom.btnDownloadUpscaled.style.display = 'inline-flex';
+                            dom.btnUpscale.style.display = 'none';
+                            showToast(`Upscaled to ${w}×${h}!`, 'success');
+                            state.isProcessing = false;
+                            dom.btnUpscale.disabled = false;
+                            dom.btnUpscale.innerHTML = '🚀 AI Upscale to 4K';
+                        };
+                        img.onerror = () => { throw new Error('Image load error'); };
+                        img.src = state.originalImageData.src;
+                    } catch (err) {
+                        showToast('Upscale failed.', 'error');
+                        state.isProcessing = false;
+                        dom.btnUpscale.disabled = false;
+                        dom.btnUpscale.innerHTML = '🚀 AI Upscale to 4K';
+                    }
+                }, 100);
+            }
+
+            function stepwiseUpscale(img, w, h) {
+                const MAX_STEP = 1.8;
+                let cw = img.width, ch = img.height;
+                const scale = Math.max(w/cw, h/ch);
+                const steps = Math.max(1, Math.ceil(Math.log(scale)/Math.log(MAX_STEP)));
+                const stepScale = Math.pow(scale, 1/steps);
+                let srcCanvas = document.createElement('canvas');
+                srcCanvas.width = cw; srcCanvas.height = ch;
+                const ctx = srcCanvas.getContext('2d');
+                ctx.imageSmoothingEnabled = true; ctx.drawImage(img, 0, 0);
+                for (let i = 0; i < steps; i++) {
+                    let nw, nh;
+                    if (i === steps-1) { nw = w; nh = h; }
+                    else { nw = Math.round(cw*stepScale); nh = Math.round(ch*stepScale); }
+                    const next = document.createElement('canvas');
+                    next.width = nw; next.height = nh;
+                    const nctx = next.getContext('2d');
+                    nctx.imageSmoothingEnabled = true;
+                    nctx.drawImage(srcCanvas, 0, 0, cw, ch, 0, 0, nw, nh);
+                    srcCanvas = next; cw = nw; ch = nh;
+                }
+                const sharp = applySharpen(srcCanvas);
+                return sharp.toDataURL('image/jpeg', 0.92);
+            }
+
+            function applySharpen(canvas) {
+                const ctx = canvas.getContext('2d');
+                const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                const d = imgData.data, w = canvas.width, h = canvas.height;
+                const out = new Uint8ClampedArray(d);
+                const k = [0,-0.4,0, -0.4,2.6,-0.4, 0,-0.4,0];
+                for (let y=1; y<h-1; y++) {
+                    for (let x=1; x<w-1; x++) {
+                        const idx = (y*w+x)*4;
+                        for (let c=0; c<3; c++) {
+                            let s = 0;
+                            for (let ky=-1; ky<=1; ky++)
+                                for (let kx=-1; kx<=1; kx++)
+                                    s += d[((y+ky)*w+(x+kx))*4+c] * k[(ky+1)*3+(kx+1)];
+                            out[idx+c] = Math.min(255, Math.max(0, s));
+                        }
+                    }
+                }
+                const resCanvas = document.createElement('canvas');
+                resCanvas.width = w; resCanvas.height = h;
+                resCanvas.getContext('2d').putImageData(new ImageData(out, w, h), 0, 0);
+                return resCanvas;
+            }
+
+            dom.btnUpscale.addEventListener('click', aiUpscale);
+            dom.btnDownloadUpscaled.addEventListener('click', () => {
+                if (!state.upscaledImageData) return showToast('Upscale first.', 'error');
+                const a = document.createElement('a');
+                a.href = state.upscaledImageData.src;
+                a.download = `upscaled_4k_${state.upscaledImageData.width}x${state.upscaledImageData.height}.jpg`;
+                document.body.appendChild(a); a.click(); document.body.removeChild(a);
+                showToast('4K image downloaded!', 'success');
+            });
+            dom.btnClearImage.addEventListener('click', () => {
+                state.originalImageData = null; state.upscaledImageData = null;
+                dom.originalImage.src = ''; dom.upscaledImage.src = '';
+                dom.originalRes.textContent = ''; dom.upscaledRes.textContent = '';
+                dom.imagePreviewArea.classList.remove('show');
+                dom.dropZone.style.display = '';
+                dom.btnUpscale.style.display = 'inline-flex';
+                dom.btnDownloadUpscaled.style.display = 'none';
+                dom.imageInput.value = '';
+                state.isProcessing = false;
+                dom.btnUpscale.disabled = false;
+                dom.btnUpscale.innerHTML = '🚀 AI Upscale to 4K';
+            });
+
+            // Init
             switchPlatform('youtube');
         })();
     </script>
