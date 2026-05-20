@@ -445,6 +445,9 @@
 async function downloadMedia() {
     if (!state.videoInfo) return showToast('Fetch info first.', 'error');
 
+    dom.btnDownload.disabled = true;
+    dom.btnDownload.innerHTML = '<span class="spinner"></span> Downloading...';
+
     const ext = state.format === 'mp3' ? 'mp3' : 'mp4';
     const title = (state.videoInfo.title || 'video')
         .replace(/[^a-zA-Z0-9\s]/g, '')
@@ -455,37 +458,37 @@ async function downloadMedia() {
 
     if (state.videoInfo.type === 'tiktok') {
         downloadUrl = `${BACKEND}/api/download-video?url=${encodeURIComponent(state.videoInfo.directUrl)}&title=${encodeURIComponent(title)}&ext=${ext}`;
-    } else {
+    } else if (state.videoInfo.type === 'youtube' || state.videoInfo.type === 'facebook') {
         downloadUrl = `${BACKEND}/api/download-video?url=${encodeURIComponent(state.videoInfo.originalUrl)}&formatId=${state.videoInfo.formatId}&title=${encodeURIComponent(title)}&ext=${ext}`;
+    } else {
+        // fallback for any other type
+        downloadUrl = `${BACKEND}/api/download-video?url=${encodeURIComponent(state.videoInfo.directUrl || state.videoInfo.originalUrl)}&title=${encodeURIComponent(title)}&ext=${ext}`;
     }
 
-    // Try anchor click first (works in all browsers)
-    const a = document.createElement('a');
-    a.href = downloadUrl;
-    a.download = '';                         // not strictly needed, server sends header
-    a.target = '_blank';                     // fallback if anchor click doesn't trigger download
-    a.rel = 'noopener noreferrer';
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    a.click();
+    try {
+        // Fetch as blob (like the original TikTok method)
+        const response = await fetch(downloadUrl);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
-    // Clean up after a short delay
-    setTimeout(() => {
+        const blob = await response.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = `${title}.${ext}`;
+        document.body.appendChild(a);
+        a.click();
         document.body.removeChild(a);
-    }, 2000);
+        setTimeout(() => URL.revokeObjectURL(blobUrl), 5000);
 
-    showToast('Download started! ✅', 'success');
-
-    // If the anchor didn't work (e.g., browser blocked it), fallback to window.open
-    // We can't detect success, but we can try window.open as a backup after a small delay
-    setTimeout(() => {
-        // This is a failsafe – if no download started, the user can manually open it
-        // It won't open a new window if the download already started
-        const userPrompt = confirm('If the download hasn\'t started, click OK to open it in a new tab.');
-        if (userPrompt) {
-            window.open(downloadUrl, '_blank');
-        }
-    }, 3000);
+        showToast('Download complete! ✅', 'success');
+    } catch (err) {
+        console.error('Download failed:', err);
+        showToast('Download failed. Trying direct link...', 'error');
+        window.open(downloadUrl, '_blank');
+    } finally {
+        dom.btnDownload.disabled = false;
+        dom.btnDownload.innerHTML = state.format === 'mp3' ? '⬇️ Download MP3' : '⬇️ Download MP4';
+    }
 }
 
 // Helper fetch with timeout (add this anywhere in your script)
