@@ -458,7 +458,7 @@ async function downloadMedia() {
 }
 
 // Helper fetch with timeout (add this anywhere in your script)
-async function fetchWithTimeout(url, options = {}, timeout = 8000) {
+async function fetchWithTimeout(url, options = {}, timeout = 10000) {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), timeout);
     try {
