@@ -426,19 +426,38 @@
 
 async function downloadMedia() {
     if (!state.directUrl) return showToast('Fetch info first.', 'error');
+
     dom.btnDownload.disabled = true;
-    dom.btnDownload.innerHTML = '<span class="spinner"></span> Downloading...';
-    const ext = state.format === 'mp3' ? 'mp3' : 'mp4';
-    const title = (state.videoInfo?.title || 'video').substring(0, 60);
-    const proxyUrl = `${BACKEND}/api/proxy-download?url=${encodeURIComponent(state.directUrl)}&title=${encodeURIComponent(title)}&ext=${ext}`;
-    const iframe = document.createElement('iframe');
-    iframe.style.display = 'none';
-    iframe.src = proxyUrl;
-    document.body.appendChild(iframe);
-    setTimeout(() => document.body.removeChild(iframe), 5000);
-    showToast('Download started! ✅', 'success');
-    dom.btnDownload.disabled = false;
-    dom.btnDownload.innerHTML = state.format === 'mp3' ? '⬇️ Download MP3' : '⬇️ Download MP4';
+    dom.btnDownload.innerHTML = '<span class="spinner"></span> Starting...';
+
+    try {
+        const ext = state.format === 'mp3' ? 'mp3' : 'mp4';
+        const title = (state.videoInfo?.title || 'video')
+            .replace(/[^a-zA-Z0-9\s]/g, '')
+            .substring(0, 60)
+            .trim() || 'video';
+
+        // Build the proxy URL that will force a download
+        const proxyUrl = `${BACKEND}/api/proxy-download?url=${encodeURIComponent(state.directUrl)}&title=${encodeURIComponent(title)}&ext=${ext}`;
+
+        // Create an invisible anchor and click it – this ALWAYS triggers a download
+        const a = document.createElement('a');
+        a.href = proxyUrl;
+        a.download = '';                   // Not strictly needed because the server sends Content-Disposition
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+        showToast('Download started! ✅', 'success');
+    } catch (err) {
+        console.error(err);
+        showToast('Download failed. Opening in new tab.', 'error');
+        window.open(state.directUrl, '_blank');
+    } finally {
+        dom.btnDownload.disabled = false;
+        dom.btnDownload.innerHTML = state.format === 'mp3' ? '⬇️ Download MP3' : '⬇️ Download MP4';
+    }
 }
 
             function clearResult(clearInput = true) {
