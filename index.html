@@ -368,13 +368,13 @@
     const url = dom.videoUrl.value.trim();
     if (!url) return showToast('Paste a link first.', 'error');
 
-    // Auto-detect platform
     if (/youtube\.com|youtu\.be/.test(url)) switchPlatform('youtube');
     else if (/facebook\.com|fb\.watch/.test(url)) switchPlatform('facebook');
     else if (/tiktok\.com/.test(url)) switchPlatform('tiktok');
     else return showToast('Unsupported URL.', 'error');
 
     state.videoInfo = null;
+    state.directUrl = null;
     dom.resultArea.classList.remove('show');
     dom.btnFetch.disabled = true;
     dom.btnFetch.innerHTML = '<span class="spinner"></span> Fetching...';
@@ -386,48 +386,31 @@
             const resp = await fetch(`${BACKEND}/api/youtube?url=${encodeURIComponent(url)}`);
             if (!resp.ok) throw new Error((await resp.json()).error);
             data = await resp.json();
-            state.videoInfo = {
-                title: data.title,
-                thumbnail: data.thumbnail,
-                duration: data.duration,
-                quality: data.quality,
-                formatId: data.formatId,   // used later for download
-                type: 'youtube',
-                originalUrl: url,
-            };
         } else if (state.platform === 'tiktok') {
             const resp = await fetch(`${BACKEND}/api/tiktok?url=${encodeURIComponent(url)}`);
             if (!resp.ok) throw new Error((await resp.json()).error);
             data = await resp.json();
-            state.videoInfo = {
-                title: data.title,
-                thumbnail: data.thumbnail,
-                duration: data.duration,
-                author: data.author,
-                directUrl: data.directUrl,  // TikTok gives a direct CDN URL
-                type: 'tiktok',
-            };
-        } else { // Facebook
-            const infoResp = await fetch(`${BACKEND}/api/info?url=${encodeURIComponent(url)}&format=${state.format}`);
-            if (!infoResp.ok) throw new Error((await infoResp.json()).error);
-            const infoData = await infoResp.json();
-            state.videoInfo = {
-                title: infoData.title,
-                thumbnail: infoData.thumbnail,
-                duration: infoData.duration,
-                formatId: infoData.formatId,
-                type: 'facebook',
-                originalUrl: url,
-            };
+        } else {
+            // Facebook
+            const resp = await fetch(`${BACKEND}/api/info?url=${encodeURIComponent(url)}&format=${state.format}`);
+            if (!resp.ok) throw new Error((await resp.json()).error);
+            data = await resp.json();
         }
 
-        // Update UI
+        state.videoInfo = {
+            title: data.title,
+            thumbnail: data.thumbnail,
+            duration: data.duration,
+            author: data.author,
+            quality: data.quality,
+        };
+        state.directUrl = data.downloadUrl;   // <-- key for download
+
         dom.previewThumb.src = state.videoInfo.thumbnail || '';
         dom.previewTitle.textContent = state.videoInfo.title || 'Video';
         let meta = `Format: ${state.format === 'mp3' ? 'MP3' : 'MP4'}`;
         if (state.videoInfo.duration) meta += ` | Duration: ${state.videoInfo.duration}`;
         if (state.videoInfo.author) meta += ` | @${state.videoInfo.author}`;
-        if (state.videoInfo.quality) meta += ` | ${state.videoInfo.quality}`;
         dom.previewMeta.textContent = meta;
         dom.resultArea.classList.add('show');
         dom.btnDownload.textContent = state.format === 'mp3' ? '⬇️ Download MP3' : '⬇️ Download MP4';
